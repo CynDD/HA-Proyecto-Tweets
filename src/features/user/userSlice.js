@@ -8,6 +8,8 @@ const userSlice = createSlice({
     signingUp: false,
     signupError: null,
     loggedIn: false,
+    loginError: null,
+    loggingIn: false,
   },
   reducers: {
     signupUserStart(state, action) {
@@ -24,17 +26,21 @@ const userSlice = createSlice({
       state.signupError = action.payload;
     },
     loginUserStart(state, action) {
-      state.signingUp = true;
+      // usa estado específico para login, no los de signup
+      // quedaría: state.loggingIn = true
+      state.loggingIn = true;
     },
     loginUserSuccess(state, action) {
-      state.signingUp = false;
+      // usa loggingIn
+      state.loggingIn = true;
       state.loggedIn = true;
-      state.signupError = null;
+      state.loginError = null;
+      // usa loginError
     },
     loginUserError(state, action) {
-      state.signingUp = false;
+      state.loggingIn = false;
       state.loggedIn = false;
-      state.signupError = action.payload;
+      state.loginError = action.payload;
     },
   },
 });

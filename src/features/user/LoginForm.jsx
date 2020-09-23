@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { loginUser } from "./userSlice";
 
 function LoginForm({ history }) {
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.signupError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ user, password }, history));
+    dispatch(loginUser({ username, password }, history));
   };
 
   return (
@@ -21,7 +21,7 @@ function LoginForm({ history }) {
         type="text"
         placeholder="Enter email or username"
         required
-        value={user}
+        value={username}
         onChange={(e) => setUser(e.target.value)}
       />
       <br />
