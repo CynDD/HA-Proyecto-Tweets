@@ -8,6 +8,7 @@ const tweetSlice = createSlice({
     sendingTweet: false,
     sendTweetError: null,
     loading: false,
+    error: null,
   },
   reducers: {
     sendTweetStart(state, action) {
@@ -28,6 +29,12 @@ const tweetSlice = createSlice({
     fetchTweetsSuccess(state, action) {
       state.loading = false;
       state.tweets = action.payload;
+      state.error = null;
+    },
+    fetchTweetsError(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+      state.tweets = [];
     },
   },
 });
@@ -38,6 +45,7 @@ export const {
   sendTweetSuccess,
   fetchTweetsStart,
   fetchTweetsSuccess,
+  fetchTweetsError,
 } = tweetSlice.actions;
 
 export const sendTweet = (text, history) => async (dispatch) => {
@@ -54,8 +62,12 @@ export const sendTweet = (text, history) => async (dispatch) => {
 
 export const fetchTweets = () => async (dispatch) => {
   dispatch(fetchTweetsStart());
-  const response = await api.get("/tweets");
-  dispatch(fetchTweetsSuccess(response.data));
+  try {
+    const response = await api.get("/tweets");
+    dispatch(fetchTweetsSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchTweetsError(error.message));
+  }
 };
 
 export default tweetSlice.reducer;
