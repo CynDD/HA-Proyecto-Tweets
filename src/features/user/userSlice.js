@@ -26,7 +26,7 @@ const userSlice = createSlice({
       state.signupError = action.payload;
     },
     loginUserStart(state, action) {
-      // usa estado específico para login, no los de signup
+      // estado específico para login, no los de signup
       // quedaría: state.loggingIn = true
       state.loggingIn = true;
     },

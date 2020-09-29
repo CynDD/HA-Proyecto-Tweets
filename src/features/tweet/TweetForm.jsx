@@ -5,7 +5,7 @@ import { sendTweet } from "./tweetSlice";
 function TweetForm({ history }, props) {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
-  const user = props.match.params.user;
+  const user = props.user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
