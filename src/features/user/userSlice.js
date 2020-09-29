@@ -43,6 +43,13 @@ const userSlice = createSlice({
       state.loggedIn = false;
       state.loginError = action.payload;
     },
+    logoutUserStart(state, action) {
+      state.loggedIn = false;
+    },
+    logoutUserError(state, action) {
+      state.loggedIn = true;
+      state.loginError = action.payload;
+    },
   },
 });
 
@@ -53,6 +60,8 @@ export const {
   loginUserError,
   loginUserStart,
   loginUserSuccess,
+  logoutUserStart,
+  logoutUserError,
 } = userSlice.actions;
 
 export const signupUser = (user, history) => {
@@ -104,20 +113,20 @@ export const loginUser = (user, history) => {
 export const logoutUser = (user, history) => {
   // (para limpiar el token, loggedIn y el header de axios) y redireccionar a la página principal
   return async function (dispatch) {
-    //dispatch(loginUserStart());
+    dispatch(logoutUserStart());
 
-    //try {
-    // limpio el token
-    localStorage.removeItem("token");
+    try {
+      // limpio el token
+      localStorage.removeItem("token");
 
-    // actulizar instancia de axios
-    //api.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+      // limpiar instancia header de axios
+      api.defaults.headers["Authorization"] = null;
 
-    // redireccionar a tweets
-    history.push("/new-tweet");
-    /* } catch (error) {
-      dispatch(loginUserError(error.response?.data));
-    }*/
+      // redireccionar a tweets
+      history.push("/new-tweet");
+    } catch (error) {
+      dispatch(logoutUserError(error.response?.data));
+    }
   };
 };
 
