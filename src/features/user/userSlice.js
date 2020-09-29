@@ -29,6 +29,7 @@ const userSlice = createSlice({
       // estado específico para login, no los de signup
       // quedaría: state.loggingIn = true
       state.loggingIn = true;
+      state.loggedIn = false;
     },
     loginUserSuccess(state, action) {
       // usa loggingIn
