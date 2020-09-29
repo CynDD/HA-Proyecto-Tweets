@@ -102,26 +102,23 @@ export const loginUser = (user, history) => {
 };
 
 export const logoutUser = (user, history) => {
-  /* return async function (dispatch) {
-    dispatch(loginUserStart());
+  // (para limpiar el token, loggedIn y el header de axios) y redireccionar a la página principal 
+   return async function (dispatch) {
+    //dispatch(loginUserStart());
 
     try {
-      const response = await api.post("/sessions", user);
-
-      dispatch(loginUserSuccess());
-
-      // guardar en localStorage
-      localStorage.setItem("token", response.data.token);
+      // limpio el token
+      localStorage.removeItem("token");
 
       // actulizar instancia de axios
-      api.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+      //api.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
 
       // redireccionar a tweets
       history.push("/new-tweet");
-    } catch (error) {
+   /* } catch (error) {
       dispatch(loginUserError(error.response?.data));
-    }
-  };*/
+    }*/
+  };
 };
 
 export default userSlice.reducer;
