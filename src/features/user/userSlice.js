@@ -102,20 +102,20 @@ export const loginUser = (user, history) => {
 };
 
 export const logoutUser = (user, history) => {
-  // (para limpiar el token, loggedIn y el header de axios) y redireccionar a la página principal 
-   return async function (dispatch) {
+  // (para limpiar el token, loggedIn y el header de axios) y redireccionar a la página principal
+  return async function (dispatch) {
     //dispatch(loginUserStart());
 
-    try {
-      // limpio el token
-      localStorage.removeItem("token");
+    //try {
+    // limpio el token
+    localStorage.removeItem("token");
 
-      // actulizar instancia de axios
-      //api.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+    // actulizar instancia de axios
+    //api.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
 
-      // redireccionar a tweets
-      history.push("/new-tweet");
-   /* } catch (error) {
+    // redireccionar a tweets
+    history.push("/new-tweet");
+    /* } catch (error) {
       dispatch(loginUserError(error.response?.data));
     }*/
   };
