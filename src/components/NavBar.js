@@ -1,10 +1,11 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logoutUser } from "../features/user/userSlice";
 
 function NavBar() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.loggedIn);
   return (
     <nav>
@@ -30,7 +31,11 @@ function NavBar() {
         ) : (
           <div>
             <li className="element">
-              <NavLink to="/logout" activeClassName="active">
+              <NavLink
+                to="/"
+                activeClassName="active"
+                onClick={() => dispatch(logoutUser())}
+              >
                 Log out
               </NavLink>
             </li>
