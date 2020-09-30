@@ -33,7 +33,7 @@ const userSlice = createSlice({
     },
     loginUserSuccess(state, action) {
       // usa loggingIn
-      state.loggingIn = true;
+      state.loggingIn = false;
       state.loggedIn = true;
       state.loginError = null;
       // usa loginError
